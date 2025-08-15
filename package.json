@@ -18,6 +18,7 @@
     "@headlessui/react": "^1.7.0",
     "@heroicons/react": "^2.0.0",
     "@prisma/client": "^5.0.0",
+    "@tailwindcss/typography": "^0.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -44,7 +45,6 @@
     "zustand": "^4.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.0"
   }
