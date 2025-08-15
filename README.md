@@ -443,5 +443,3 @@ A: 在 API 配置中设置：
 ---
 
 **让我们一起在AI时代高效协作！** 🚀
-
-![Star History Chart](https://api.star-history.com/svg?repos=your-username/prompt-engineering-demo&type=Date)
