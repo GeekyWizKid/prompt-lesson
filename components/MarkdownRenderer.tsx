@@ -6,8 +6,9 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+// @ts-ignore - Style file doesn't have type definitions
+import atomOneDark from 'react-syntax-highlighter/dist/styles/atom-one-dark';
 import { Copy, Check } from 'lucide-react';
 import 'highlight.js/styles/github-dark.css';
 
@@ -58,7 +59,7 @@ export function MarkdownRenderer({ content, streaming = false, className = '' }:
           </button>
         </div>
         <SyntaxHighlighter
-          style={oneDark}
+          style={atomOneDark}
           language={language}
           PreTag="div"
           className="rounded-lg !bg-neutral-950 !mt-0"

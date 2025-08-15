@@ -28,7 +28,8 @@ import {
   Code,
   FileText,
   GitBranch,
-  Zap
+  Zap,
+  Twitter
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -272,7 +273,16 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="sm"
+                icon={<Twitter className="w-4 h-4" />}
+                onClick={() => window.open('https://x.com/named_Das', '_blank')}
+              >
+                Twitter
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 icon={<Github className="w-4 h-4" />}
+                onClick={() => window.open('https://github.com/GeekyWizKid/prompt-lesson', '_blank')}
               >
                 GitHub
               </Button>
