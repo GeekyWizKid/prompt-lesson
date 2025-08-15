@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-soft border border-neutral-200 
+           relative transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated;
+  }
+  
+  .card::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-1 
+           bg-gradient-to-r from-orange-500 to-orange-400 
+           rounded-t-xl;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 
+           font-semibold rounded-lg transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-orange-600 text-white hover:bg-orange-700 
+           focus:ring-orange-500 hover:-translate-y-0.5 shadow-soft;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-200 text-neutral-700 hover:bg-neutral-300 
+           focus:ring-neutral-500;
+  }
+  
+  .code-block {
+    @apply bg-neutral-950 text-neutral-100 border border-neutral-800 
+           rounded-lg p-4 font-mono text-sm overflow-x-auto 
+           relative;
+  }
+  
+  .code-block::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-0.5 
+           bg-gradient-to-r from-orange-500 to-orange-400;
+  }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100 rounded-md;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-orange-400 rounded-md hover:bg-orange-500 transition-colors;
+}
+
+/* 选择文本样式 */
+::selection {
+  @apply bg-orange-200 text-neutral-900;
+}
+
+::-moz-selection {
+  @apply bg-orange-200 text-neutral-900;
+}

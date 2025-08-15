@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model PromptTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String   // 'development', 'product', 'general'
+  type        String   // 'zero-shot', 'few-shot', 'chain-of-thought', 'role-playing'
+  content     String
+  tags        String   // JSON string for tags 
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  sessions    PromptSession[]
+  
+  @@map("prompt_templates")
+}
+
+model PromptSession {
+  id         String   @id @default(cuid())
+  templateId String?
+  userPrompt String
+  aiResponse String?
+  metadata   String?  // JSON string for additional data
+  rating     Int?     // 1-5 rating for the response quality
+  createdAt  DateTime @default(now())
+  
+  // Relations
+  template   PromptTemplate? @relation(fields: [templateId], references: [id])
+  
+  @@map("prompt_sessions")
+}
+
+model UserFeedback {
+  id          String   @id @default(cuid())
+  sessionId   String?
+  type        String   // 'bug', 'feature', 'improvement'
+  content     String
+  rating      Int?     // 1-5 overall satisfaction
+  email       String?
+  resolved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  
+  @@map("user_feedback")
+}

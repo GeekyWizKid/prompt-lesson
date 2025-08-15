@@ -1,0 +1,9 @@
+{
+  "name": "vercel-build",
+  "version": "0.0.0",
+  "dependencies": {},
+  "scripts": {
+    "build": "next build",
+    "postinstall": "prisma generate && prisma db push"
+  }
+}
