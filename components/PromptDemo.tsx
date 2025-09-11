@@ -23,7 +23,8 @@ const architectures = [
     description: '直接提出问题或任务，适用于明确、标准化的场景',
     example: '请解释什么是RESTful API的核心原则',
     template: '请详细解释[具体概念或技术]的核心要点和最佳实践。',
-    useCases: ['技术概念解释', '标准化问题回答', '基础知识查询']
+    useCases: ['技术概念解释', '标准化问题回答', '基础知识查询'],
+    bestPractices: '确保问题明确、避免歧义、使用专业术语'
   },
   {
     id: 'few-shot',
@@ -38,7 +39,8 @@ const architectures = [
 示例2: [输入2] → [期望输出2]
 
 现在请为: [新输入] 提供相同格式的输出`,
-    useCases: ['格式化输出', '风格统一', '模式识别']
+    useCases: ['格式化输出', '风格统一', '模式识别'],
+    bestPractices: '提供2-5个高质量示例，覆盖边缘情况'
   },
   {
     id: 'chain-of-thought',
@@ -53,7 +55,8 @@ const architectures = [
 1. 首先[分析步骤1]
 2. 然后[分析步骤2]
 3. 最后[分析步骤3]`,
-    useCases: ['复杂问题分析', '逐步推理', '决策制定']
+    useCases: ['复杂问题分析', '逐步推理', '决策制定'],
+    bestPractices: '明确每个步骤的目标，保持逻辑连贯性'
   },
   {
     id: 'role-playing',
@@ -62,7 +65,83 @@ const architectures = [
     description: '设定特定身份和专业视角进行分析',
     example: `作为资深产品经理，请分析这个用户需求的优先级和实现难度`,
     template: `作为[专业角色]，请从[视角]角度分析[具体问题]`,
-    useCases: ['专业分析', '多角度思考', '专家建议']
+    useCases: ['专业分析', '多角度思考', '专家建议'],
+    bestPractices: '选择合适的角色，提供背景信息'
+  },
+  {
+    id: 'self-consistency',
+    name: '自我一致性',
+    icon: <GitBranch className="w-5 h-5" />,
+    description: '生成多个推理路径，选择最一致的答案',
+    example: `问题：如果A比B高，B比C高，那么A和C的关系是什么？
+
+让我用不同方法推理：
+方法1：传递性原理 A>B, B>C → A>C
+方法2：数值假设 A=180, B=170, C=160 → A>C
+方法3：逻辑推理 A高于B且B高于C → A必然高于C
+
+结论：A比C高（所有方法一致）`,
+    template: `问题：[需要验证的问题]
+
+请用至少3种不同方法推理，并得出一致结论`,
+    useCases: ['验证答案', '提高准确性', '减少错误'],
+    bestPractices: '使用多个独立推理路径，验证一致性'
+  },
+  {
+    id: 'knowledge-generation',
+    name: '知识生成',
+    icon: <Lightbulb className="w-5 h-5" />,
+    description: '先生成相关知识，再基于知识回答问题',
+    example: `步骤1：列出关于"微服务架构"的关键知识点
+步骤2：基于这些知识，解释为什么微服务适合大型团队`,
+    template: `步骤1：生成关于[主题]的背景知识
+步骤2：基于生成的知识，回答[具体问题]`,
+    useCases: ['知识密集型任务', '专业问题', '深度分析'],
+    bestPractices: '确保生成的知识准确且相关'
+  },
+  {
+    id: 'prompt-chaining',
+    name: '提示链',
+    icon: <GitBranch className="w-5 h-5" />,
+    description: '将复杂任务分解为多个子任务串联执行',
+    example: `任务链：创建产品营销方案
+1. 市场调研 → 竞品分析报告
+2. 目标定位 → 用户画像
+3. 策略制定 → 营销策略
+4. 内容创作 → 营销文案`,
+    template: `复杂任务：[总体目标]
+子任务1：[任务1] → [输出1]
+子任务2：基于[输出1]，[任务2] → [输出2]
+子任务3：基于[输出2]，[任务3] → 最终结果`,
+    useCases: ['复杂项目', '多步骤流程', '系统设计'],
+    bestPractices: '明确子任务间的依赖关系'
+  },
+  {
+    id: 'react',
+    name: 'ReAct框架',
+    icon: <GitBranch className="w-5 h-5" />,
+    description: '结合推理(Reasoning)和行动(Acting)的迭代框架',
+    example: `任务：调试性能问题
+
+Thought 1: 需要确定性能瓶颈
+Action 1: 运行性能分析工具
+Observation 1: 数据库查询占80%时间
+
+Thought 2: 数据库是主要问题
+Action 2: 检查慢查询
+Observation 2: 发现缺少索引
+
+Thought 3: 添加索引优化
+Action 3: 创建索引
+Observation 3: 查询时间减少90%`,
+    template: `任务：[目标]
+
+重复以下循环直到完成：
+Thought: [当前思考]
+Action: [采取行动]
+Observation: [观察结果]`,
+    useCases: ['问题诊断', '迭代优化', '探索性任务'],
+    bestPractices: '清晰记录每个步骤的思考和观察'
   }
 ];
 
@@ -93,9 +172,9 @@ export function PromptArchitecture({ onGenerate, loading }: PromptArchitecturePr
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-neutral-950 mb-2 flex items-center gap-2">
           <Lightbulb className="w-6 h-6 text-orange-600" />
-          四种核心 Prompt 架构
+          八种核心 Prompt 架构
         </h2>
-        <p className="text-neutral-600">选择合适的架构模式，让AI更好地理解你的需求</p>
+        <p className="text-neutral-600">掌握从基础到高级的提示工程技术，让AI更好地理解你的需求</p>
       </div>
 
       <Tabs
@@ -124,14 +203,14 @@ export function PromptArchitecture({ onGenerate, loading }: PromptArchitecturePr
                 <div className="p-2 bg-orange-100 rounded-lg">
                   {currentArchitecture.icon}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-orange-900 mb-2">
                     {currentArchitecture.name}
                   </h3>
                   <p className="text-orange-700 text-sm mb-3">
                     {currentArchitecture.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     {currentArchitecture.useCases.map((useCase, index) => (
                       <span
                         key={index}
@@ -141,6 +220,14 @@ export function PromptArchitecture({ onGenerate, loading }: PromptArchitecturePr
                       </span>
                     ))}
                   </div>
+                  {currentArchitecture.bestPractices && (
+                    <div className="mt-3 p-2 bg-orange-100 rounded-md">
+                      <p className="text-xs text-orange-800">
+                        <span className="font-semibold">💡 最佳实践：</span>
+                        {currentArchitecture.bestPractices}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

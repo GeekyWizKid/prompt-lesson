@@ -14,6 +14,14 @@ const metaScenarios = [
   { value: 'user-research', label: '用户研究', domain: '产品调研' },
   { value: 'data-analysis', label: '数据分析', domain: '业务分析' },
   { value: 'testing-strategy', label: '测试策略', domain: '质量保证' },
+  { value: 'performance-optimization', label: '性能优化', domain: '系统优化' },
+  { value: 'security-audit', label: '安全审计', domain: '信息安全' },
+  { value: 'technical-writing', label: '技术文档', domain: '文档编写' },
+  { value: 'code-refactoring', label: '代码重构', domain: '软件工程' },
+  { value: 'database-design', label: '数据库设计', domain: '数据架构' },
+  { value: 'ui-ux-review', label: 'UI/UX评审', domain: '用户体验' },
+  { value: 'project-planning', label: '项目规划', domain: '项目管理' },
+  { value: 'competitor-analysis', label: '竞品分析', domain: '市场研究' },
 ];
 
 interface MetaPromptGeneratorProps {

@@ -8,15 +8,19 @@
 
 ## ✨ 功能特性
 
-### 🎯 四种核心Prompt架构
+### 🎯 八种核心Prompt架构
 - **零样本提示** - 直接任务提出，适用于标准化场景
 - **少样本提示** - 示例引导学习，确保格式统一
 - **思维链提示** - 逐步推理过程，解决复杂问题
 - **角色扮演** - 专业身份视角，提供专家级分析
+- **自我一致性** - 多路径验证，提高答案准确性
+- **知识生成** - 先生成知识再回答，深度分析
+- **提示链** - 任务分解串联，处理复杂项目
+- **ReAct框架** - 推理与行动结合，迭代优化
 
 ### 💼 团队实战场景
-- **开发场景**：代码审查、智能调试
-- **产品场景**：需求分析、PRD生成
+- **开发场景**：代码审查、智能调试、性能优化
+- **产品场景**：需求分析、PRD生成、用户研究
 
 ### 🧠 元Prompt工具
 - AI辅助生成专业Prompt模板
@@ -26,6 +30,12 @@
 ### ⚡ 效果对比
 - 直观展示好坏Prompt的差异
 - 量化效果提升分析
+- 最佳实践指导
+
+### 📚 学习资源
+- [提示工程完全指南](./PROMPT_ENGINEERING_GUIDE.md) - 从基础到高级的系统教程
+- [提示技术详解与示例](./PROMPT_TECHNIQUES_EXAMPLES.md) - 实战案例和代码示例
+- [高级提示工程技术](./ADVANCED_PROMPT_TECHNIQUES.md) - 前沿技术和行业应用
 
 ## 🛠️ 技术栈
 
@@ -201,7 +211,7 @@ prompt-engineering-demo/
 │   └── page.tsx           # 主页面
 ├── components/            # React 组件
 │   ├── ui/               # UI 基础组件
-│   ├── PromptDemo.tsx    # Prompt架构演示
+│   ├── PromptDemo.tsx    # Prompt架构演示（8种技术）
 │   ├── MetaPrompt.tsx    # 元Prompt工具
 │   ├── APIConfig.tsx     # API配置组件
 │   └── MarkdownRenderer.tsx # Markdown渲染
@@ -215,7 +225,11 @@ prompt-engineering-demo/
 │   ├── dev.db           # SQLite数据库
 │   └── seed.js          # 初始数据
 ├── types/                # TypeScript 类型定义
-└── public/               # 静态资源
+├── public/               # 静态资源
+└── docs/                 # 文档资源
+    ├── PROMPT_ENGINEERING_GUIDE.md     # 完整指南
+    ├── PROMPT_TECHNIQUES_EXAMPLES.md   # 技术示例
+    └── ADVANCED_PROMPT_TECHNIQUES.md   # 高级技术
 ```
 
 ## 📊 API 接口
